@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Sheets API Example</title>
+</head>
+<body>
+    <h1>Google Sheets Data</h1>
+    <div id="data"></div>
+
+    <script>
+        // Your API key and Spreadsheet ID
+        const API_KEY = 'AIzaSyB_CR55rv7XhB-Le_vmq9bzKtGdleGFa6E'; // Replace with your API key
+        const SHEET_ID = '12hieaQoaAZreKCzrDRQXZmbwt4GDsRe_qgAVOnLg3to'; // Replace with your Sheet ID
+
+        // Define the URL to fetch data
+        const API_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Sheet1?key=${API_KEY}`;
+
+        // Fetch the data
+        fetch(API_URL)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Log the entire response for debugging
+
+                // Check if data.values exists
+                if (data.values) {
+                    const values = data.values;
+                    let html = '<table border="1">';
+                    
+                    values.forEach(row => {
+                        html += '<tr>';
+                        row.forEach(cell => {
+                            html += `<td>${cell}</td>`;
+                        });
+                        html += '</tr>';
+                    });
+                    
+                    html += '</table>';
+                    document.getElementById('data').innerHTML = html;
+                } else {
+                    document.getElementById('data').innerHTML = 'No data found in the sheet.';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('data').innerHTML = `Error fetching data: ${error.message}`;
+            });
+    </script>
+</body>
+</html>

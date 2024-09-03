@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Registration</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://via.placeholder.com/1500x1000.png?text=Welcome+to+Agent+Registration');
+            background-size: cover;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agent Registration</h1>
+        <form method="POST" action="https://script.google.com/a/macros/kamakhya.org.in/s/AKfycbx_0nsc3CGAWBdZ0wJrRwbynA9s3pBcSaVJL_NnQApUe_Q3ZTcR8gvCBiflxSV52cOv/exec">
+            <input name="DeskNo" type="text" placeholder="Desk Number" required>
+            
+            <!-- Dropdown list for Agent Name -->
+            <select id="agent-name" name="Agent Name" required>
+                <option value="" disabled selected>Select Agent Name</option>
+                <!-- Agent names will be populated here dynamically -->
+            </select>
+
+            <input name="LaptopId" type="text" placeholder="Laptop ID" required>
+            
+            <button type="submit">Send</button>
+        </form>
+        <div class="footer">
+            Developed by Avinash Salunke
+        </div>
+    </div>
+
+    <script>
+        // Your API key and Spreadsheet ID
+        const API_KEY = 'AIzaSyB_CR55rv7XhB-Le_vmq9bzKtGdleGFa6E'; // Replace with your API key
+        const SHEET_ID = '12hieaQoaAZreKCzrDRQXZmbwt4GDsRe_qgAVOnLg3to'; // Replace with your Sheet ID
+
+        // Define the URL to fetch data
+        const API_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Sheet1?key=${API_KEY}`;
+
+        // Fetch the data
+        fetch(API_URL)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Log the entire response for debugging
+
+                // Check if data.values exists
+                if (data.values) {
+                    const values = data.values;
+                    const agentDropdown = document.getElementById('agent-name');
+                    
+                    // Skip the header row (if there's one)
+                    values.slice(1).forEach(row => {
+                        const agentName = row[0]; // Assuming agent names are in the first column
+                        const option = document.createElement('option');
+                        option.value = agentName;
+                        option.text = agentName;
+                        agentDropdown.appendChild(option);
+                    });
+                } else {
+                    document.getElementById('data').innerHTML = 'No data found in the sheet.';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('data').innerHTML = `Error fetching data: ${error.message}`;
+            });
+    </script>
+</body>
+</html>

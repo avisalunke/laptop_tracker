@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Registration</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://via.placeholder.com/1500x1000.png?text=Welcome+to+Agent+Registration');
+            background-size: cover;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agent Registration</h1>
+        <form method="POST" action="https://script.google.com/a/macros/kamakhya.org.in/s/AKfycbx_0nsc3CGAWBdZ0wJrRwbynA9s3pBcSaVJL_NnQApUe_Q3ZTcR8gvCBiflxSV52cOv/exec">
+            <input name="DeskNo" type="text" placeholder="Desk Number" required>
+            
+            <!-- Dropdown list for Agent Name -->
+            <select name="Agent Name" required>
+                <option value="" disabled selected>Select Agent Name</option>
+                <option value="Bharat Pandurang Ghorpade">Bharat Pandurang Ghorpade</option>
+                <option value="Pratik Ramakant Karande">Pratik Ramakant Karande</option>
+                <option value="Pravin Shivaji Lokhande">Pravin Shivaji Lokhande</option>
+                <!-- (Add all other agent names here) -->
+                <option value="Trupti Tukaram Kasrung">Trupti Tukaram Kasrung</option>
+            </select>
+
+            <input name="LaptopId" type="text" placeholder="Laptop ID" required>
+            
+            <button type="submit">Send</button>
+        </form>
+        <div class="footer">
+            Developed by Avinash Salunke
+        </div>
+    </div>
+</body>
+</html>
